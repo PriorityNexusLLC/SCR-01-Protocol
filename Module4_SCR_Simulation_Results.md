@@ -185,32 +185,73 @@ defined as "impossible" precisely because it overwhelms the throttle).
 
 This is the one analytic (not constructed) result, and it is the sharpest.
 
-**Claim.** Whether a system survives an external stressor depends on *how the
-stressor enters the equation*, not on how strong its coping is.
+> **Correction, 2026-11-11.** A check of this section against its own equations
+> found three things, and they are fixed below rather than left standing.
+> (1) The first equation was written here as Input · F_ext; the figure and the
+> stated fixed point (0.70) use Input · (1 + F_ext). (2) The earlier text said no
+> finite amount of coping is sufficient, and the figure says θ can grow to ∞ and
+> the system still crashes. The equation does not say that: the fixed point is
+> (Input + F_ext) / θ, so a large enough θ stays under the crash line. The crash
+> occurs because θ has a ceiling. (3) The earlier text said only the equation
+> structure differs. Both equations have the same form — a constant push divided
+> by θ — and differ in the size of the push. The crash inequality itself was and
+> is correct. The figure is reproduced unchanged and still carries the old
+> wording.
+
+**Claim.** Whether a system survives an external stressor depends on *how much of
+the stressor reaches it* and on *the ceiling of its coping*, not on coping
+effort below that ceiling.
 
 **The two equations.** Let s5 be internal load, s8 the crash threshold, θ the
 throttle (the coping term).
 
-- *Coping wins (stressor multiplied through the throttle):*
-  ds5/dt = (Input · F_ext) − (θ · s5) → stable fixed point at **s5 = 0.70**, safely
-  below the crash line.
-- *Coping cannot win (stressor added, outside the throttle):*
-  ds5/dt = Input − (θ · s5) + F_ext → stable fixed point at **s5 = 1.87**, past the
-  crash line.
+- *Coping wins (stressor scaled down by Input before it arrives):*
+  ds5/dt = Input · (1 + F_ext) − (θ · s5) → stable fixed point at
+  **s5 = 0.3 · 3.5 / 1.5 = 0.70**, safely below the crash line.
+- *Coping cannot win (stressor added at full strength):*
+  ds5/dt = Input − (θ · s5) + F_ext → stable fixed point at
+  **s5 = (0.3 + 2.5) / 1.5 = 1.87**, past the crash line.
 
-**Result.** Same θ, same F_ext, same Input — **only the equation structure
-differs**, and only the additive version crashes. At the moment of crash θ was at
-its maximum (1.49): the system did not fail because coping ran out of headroom;
-it failed because θ never appears in the term carrying F_ext. The general crash
-condition is exact:
+**Result.** Same θ, same F_ext, same Input. Both equations settle at a constant
+push divided by θ; the push is 1.05 in the first and 2.8 in the second, and only
+the second crashes. At the moment of crash θ was at its maximum (1.49): the
+system failed with coping at its ceiling, not for lack of effort. The crash
+condition for the additive form is exact:
 
-> **F_ext > θ · s8 − Input** (here 2.5 > 1.5 · 1.0 − 0.3 = 1.2 → crash certain).
+> **F_ext > θ_max · s8 − Input** (here 2.5 > 1.5 · 1.0 − 0.3 = 1.2 → crash certain).
+
+The scaled form has its own crash point, further out:
+F_ext > θ_max · s8 / Input − 1 (here 4.0). The two forms differ in where the
+boundary sits, not in whether one exists.
 
 **What it shows.** There is a precise boundary separating a *difficult*
 environment from a *traumatising* one. Below it, even the additive system
-survives; above it, **no finite amount of coping is sufficient**. This is a
-property of the model's structure, stated as an inequality rather than a
+survives; above it, **no coping up to its ceiling is sufficient**. Raising the
+ceiling moves the boundary; effort below the ceiling does not. This is a
+property of the model's equations, stated as an inequality rather than a
 sentiment.
+
+**What control theory calls it.** The term −θ · s5 is proportional feedback, and
+the standing level it leaves under a constant disturbance is the field's
+*steady-state error*: "a constant disturbance gives an error that can be reduced
+by feedback using a proportional controller," and "the error decreases with
+increasing controller gain" (Åström & Murray, Sec. 2.3). The field's remedy is
+integral action, which gives "zero error in the presence of constant
+disturbances" (Sec. 1.6) provided a steady state exists — and this model has no
+such term. A ceiling on θ is actuator saturation, under which "the feedback loop
+is broken and the system runs in open loop" (Sec. 11.4). The idea of a stressor
+that enters *outside* the reach of coping (an unmatched disturbance: the part
+orthogonal to the control input, Castaños & Fridman) needs at least two state
+variables and is not shown by this one-variable proof.
+
+*Sources for this paragraph:* K. J. Åström and R. M. Murray, *Feedback Systems:
+An Introduction for Scientists and Engineers*, 2nd ed., Princeton University
+Press (authors' public edition, 24 Jul 2020),
+https://www.cds.caltech.edu/~murray/books/AM08/pdf/fbs-public_24Jul2020.pdf ·
+S. Boyd, EE102 Lecture 14, "Integral action", Stanford University,
+https://web.stanford.edu/~boyd/ee102/int-ctrl.pdf · F. Castaños and L. Fridman,
+"Integral sliding surface design using an H∞ criterion for decentralized
+control", IFAC World Congress, 2005.
 
 ---
 
@@ -290,14 +331,14 @@ With that line drawn clearly, the correspondence the framework was built to
 express:
 
 - **The Trauma Proof → why burnout is structural.** If a hostile environment adds
-  load that cannot be routed through one's coping mechanism, the model says
-  collapse is inevitable above a precise threshold — regardless of how strong the
-  coping is. The framework reads this as: exhaustion under a genuinely toxic
-  environment is not a failure of willpower or "regulating better." "Try harder"
-  addresses θ; the crash lives in F_ext.
-- **Masking → the throttle that doesn't touch F_ext.** Masking damps the
-  *processable* load, not the raw external forcing — which is exactly the term the
-  model shows coping cannot cancel.
+  load at full strength, the model says collapse is inevitable above a precise
+  threshold — with coping already at its ceiling. The framework reads this as:
+  exhaustion under a genuinely toxic environment is not a failure of willpower or
+  "regulating better." "Try harder" asks for more θ from a system already at
+  θ_max; the crash lives in F_ext.
+- **Masking → the throttle that doesn't reduce F_ext.** Masking damps the
+  *processable* load, not the raw external forcing — the term that, in the model,
+  coping at its ceiling cannot hold below the crash line.
 - **Whimsy / stimming → a pressure-reactive thermodynamic release.** The two H4
   findings map directly onto the theory: the release has to happen *during* the
   stress, not deferred to a quiet evening (pressure-reactive), and it has to be
@@ -322,6 +363,8 @@ plainly is what keeps the bridge load-bearing.
   the throttle-saturation risk named above as the known calibration hazard.
 - **The Trauma Proof is analytic** and therefore the firmest result here — but it
   is a statement about the model's equations, not a measured fact about brains.
+  It was corrected on 2026-11-11 (see the note in Simulation 5): the boundary
+  depends on the ceiling of θ, and the model has one state variable.
 - **H4's supported result rests on a single (corrected) test design** and a small
   number of collapse events; it should be replicated with higher base rates and
   more runs before it is treated as settled.
@@ -336,8 +379,8 @@ plainly is what keeps the bridge load-bearing.
 
 Four regulatory mechanisms were demonstrated and then fused under an impossible
 load, firing in the predicted sequence with a 3% safety margin. One analytic
-result established the exact boundary beyond which no amount of internal
-regulation prevents collapse. One hypothesis (H3) was cleanly falsified and
+result established the exact boundary beyond which internal regulation at its
+ceiling cannot prevent collapse. One hypothesis (H3) was cleanly falsified and
 correctly re-read as a calibration finding. One hypothesis (H4) was supported —
 but only after its measuring instrument was caught being blind twice and rebuilt,
 which is the result that most deserves the reader's trust.
